@@ -8,4 +8,5 @@ Route::post('sign-up', 'UsersController@store');
 
 Route::group(['middleware' => 'auth:api'], function() {
    	Route::post('/logout', 'AuthController@logout');
+	Route::get('loggedUser/{email}', 'UsersController@showLogged');
 });
