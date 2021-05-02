@@ -29,16 +29,16 @@ class AuthController extends Controller
                 ]
             ]);
             $response = json_decode((string)$response->getBody(), true);
+            return response()->json($response, 200);
         } catch (RequestException $e) {
             if ($e->hasResponse()){
                 if ($e->getResponse()->getStatusCode() == '400') {
-                    $response = json_encode(('Credentials are wrong.'), true);
+                    return response()->json('Credentials are wrong.', 404);
                 }
             }
         } catch (\Exception $e) {
-            $response = json_encode("Please try again later.", true);
+            return response()->json("Please try again later.", 404);
         }
-        return response()->json($response, 200);
     }
 
     public function logout()

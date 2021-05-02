@@ -14,8 +14,8 @@ class CreateSearchInstancesTable extends Migration
     public function up()
     {
         Schema::create('search_instances', function (Blueprint $table) {
-            $table->id();
-            $table->integer('alert_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('alert_id');
             $table->string('url');
             $table->timestamps();
         });

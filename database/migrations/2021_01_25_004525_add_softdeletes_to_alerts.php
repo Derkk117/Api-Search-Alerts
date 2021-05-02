@@ -15,6 +15,7 @@ class AddSoftdeletesToAlerts extends Migration
     {
         Schema::table('alerts', function (Blueprint $table) {
             $table->softDeletes();
+        	$table->foreign('search_id')->references('id')->on('searches')->onDelete('cascade');
         });
     }
 

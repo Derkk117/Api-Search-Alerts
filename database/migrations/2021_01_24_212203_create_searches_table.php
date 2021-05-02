@@ -14,10 +14,10 @@ class CreateSearchesTable extends Migration
     public function up()
     {
         Schema::create('searches', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('concept');
-            $table->integer('alert_id');
+            $table->unsignedBigInteger('alert_id')->nullable();
             $table->timestamps();
         });
     }
