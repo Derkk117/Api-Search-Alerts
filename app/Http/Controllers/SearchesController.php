@@ -11,6 +11,14 @@ class SearchesController extends Controller
 {    
     public $status = 200;
 
+	public function index(){
+		return response()->json(Search::searches()->get());
+	}
+
+	public function recentSearches(User $user){
+		return response()->json(Search::recentSearches($user)->get());
+	}
+
     public function store(SearchStore $request){
         $user_id = \DB::select("SELECT * FROM users WHERE email='" . $request->email . "' LIMIT 1");
         $request['user_id'] = $user_id[0]->id;
@@ -25,6 +33,5 @@ class SearchesController extends Controller
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
-    
     }
 }
