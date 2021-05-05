@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Alert extends Model
 {
     use SoftDeletes;
-    use App\Traits\STRC;
-    //
+
+    protected $fillable = ['search_id', 'activate'];
+    protected $hidden = ['id', 'created_at', 'updated_at', 'deleted_at'];
+    protected $keyType = 'string';
+    protected $table = 'alerts';
 }

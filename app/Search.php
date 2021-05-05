@@ -14,14 +14,14 @@ class Search extends Model
     protected $keyType = 'string';
     protected $table = 'searches';
     
-    public function scopeSearches($query)
+    public function scopeSearches($query, $user)
 	{
-		return $query->select('concept', 'alert_id');
+		return $query->select('id as sku', 'concept', 'alert_id')->where('user_id', $user->id)->where('deleted_at', NULL);
 	}
 
     public function scopeRecentSearches($query, $user)
     {
-        return $query->select('concept', 'alert_id')->where('user_id', $user->id)->limit(3);
+        return $query->select('id as sku', 'concept', 'alert_id')->where('user_id', $user->id)->where('deleted_at', NULL)->limit(3);
     }
 
     public function User()

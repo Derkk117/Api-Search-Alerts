@@ -15,7 +15,7 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('search_id');
+            $table->unsignedBigInteger('search_id')->unique();
             $table->boolean('activate');
             $table->timestamps();
         });

@@ -11,10 +11,15 @@ Route::group(['middleware' => 'auth:api'], function() {
    	//User routes
 	Route::post('/logout', 'AuthController@logout');
 	Route::get('loggedUser/{email}', 'UsersController@showLogged');
-	Route::post('/user/update/{user}', 'UsersController@update');
+	Route::post('/user/update/{user}', 'UsersController@update');//should be put type, but put method not support blob columns.
 
 	//Searches routes
 	Route::post('search', 'SearchesController@store');
-	Route::get('searches', 'SearchesController@index');
+	Route::get('search/{search}', 'SearchesController@show');
+	Route::get('searches/{user}', 'SearchesController@index');
 	Route::get('recent/searches/{user}', 'SearchesController@recentSearches');
+
+	//Alerts routes
+	Route::post('alert', 'AlertsController@store');
+	Route::get ('alert/{alert}', 'AlertsController@show');
 });
