@@ -32,7 +32,7 @@ class SearchesController extends Controller
         $request['user_id'] = $user_id[0]->id;
         $create = function() use ($request){
 			try{
-				$user = Search::create($request->all());
+				$search = Search::create($request->all());
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				dd($e);

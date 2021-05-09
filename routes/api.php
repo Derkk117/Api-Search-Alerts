@@ -21,5 +21,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 	//Alerts routes
 	Route::post('alert', 'AlertsController@store');
-	Route::get ('alert/{alert}', 'AlertsController@show');
+	Route::get('alert/{search}', 'AlertsController@show');
+	Route::get('alertId/{search}', 'AlertsController@getAlertId');
+	Route::put('alert/{search}', 'AlertsController@update');
+
+	//Search_Instances routes
+	Route::post('sInstance', 'SearchInstanceController@store');
+	Route::put('sInstance/{searchInstance}', 'SearchInstanceController@update');
 });

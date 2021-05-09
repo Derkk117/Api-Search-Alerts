@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSearchInstancesTable extends Migration
+class AddTimeFieldToAlerts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSearchInstancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('search_instances', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('alert_id');
-            $table->string('page_name');
-            $table->timestamps();
+        Schema::table('alerts', function (Blueprint $table) {
+            $table->time('schedule');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateSearchInstancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('search_instances');
+        Schema::table('alerts', function (Blueprint $table) {
+            $table->dropColumn('schedule');
+        });
     }
 }

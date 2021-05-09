@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SearchInstance extends Model
 {
     use SoftDeletes;
-    use App\Traits\STRC;
-    //
+    protected $fillable = ['id', 'alert_id', 'activate', 'page_name'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $keyType = 'string';
+    protected $table = 'search_instances';
+
+    public function Alert()
+    {
+        return $this->belongsTo('App\Alert');
+    }
 }

@@ -26,6 +26,11 @@ class Search extends Model
 
     public function User()
     {
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
+    }
+
+    public function Alert()
+    {
+        return $this->hasOne('App\Alert');
     }
 }

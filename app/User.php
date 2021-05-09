@@ -28,6 +28,6 @@ class User extends Authenticatable
     }
 
     public function Searches(){
-        $this->hasMany('App\Search');
+        return $this->hasMany('App\Search');
     }
 }

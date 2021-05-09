@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;   
 
-class AlertStore extends FormRequest
+class AlertUpdate extends FormRequest
 {
     public function authorize()
     {
@@ -22,7 +22,6 @@ class AlertStore extends FormRequest
     public function rules()
     {
         return [
-            'search_id' => 'required',
             'activate' => 'required',
             'schedule' => 'required',
         ];
@@ -31,7 +30,6 @@ class AlertStore extends FormRequest
     public function messages()
     {
         return [
-            'search_id.required' => 'Search_id is a required field.',
             'activate.required' => 'Activate is a required field.',
             'schedule.required' => 'Schedule is a required field',
         ];

@@ -19,11 +19,6 @@ class UsersController extends Controller
         return response()->json(User::users()->get());
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(UserStore $request)
     {
         $create = function() use ($request){
@@ -49,16 +44,6 @@ class UsersController extends Controller
         return response()->file("UserImages/".$path);
     }
 
-    public function show($id)
-    {
-
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
     public function update(UserUpdate $request, User $user)
     {
         $update = function() use ($request, $user){
@@ -79,10 +64,5 @@ class UsersController extends Controller
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($update), 'status' => $this->status], $this->status);
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;   
 
-class AlertStore extends FormRequest
+class SearchInstanceStore extends FormRequest
 {
     public function authorize()
     {
@@ -16,24 +16,23 @@ class AlertStore extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->merge(['id' => '1']);
     }
 
     public function rules()
     {
         return [
-            'search_id' => 'required',
+            'alert_id' => 'required',
+            'page_name' => 'required',
             'activate' => 'required',
-            'schedule' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'search_id.required' => 'Search_id is a required field.',
-            'activate.required' => 'Activate is a required field.',
-            'schedule.required' => 'Schedule is a required field',
+            'alert_id.required' => 'Alert_id is a required field.',
+            'page_name.required' => 'Concept is a required field.',
+            'activate.required' => 'Concept is a required field.',
         ];
     }
 
