@@ -16,6 +16,11 @@ class SearchesController extends Controller
 		return response()->json(Search::searches($user)->get());
 	}
 
+	public function showSearches(User $user)
+	{
+		return Search::select('id as id', 'id as sku', 'user_id', 'concept', 'alert_id')->where('user_id', $user->id)->with('Alert')->get();
+	}
+
 	public function recentSearches(User $user)
 	{
 		return response()->json(Search::recentSearches($user)->orderBy('created_at','desc')->get());
@@ -23,7 +28,7 @@ class SearchesController extends Controller
 
 	public function show(Search $search)
 	{
-		return $search;
+		return Search::where('id', $search->id)->with('Alert')->first();
 	}
 
     public function store(SearchStore $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alert;
+use App\Search;
 use Illuminate\Http\Request;
 use App\Http\Requests\AlertStore;
 use App\Http\Requests\AlertUpdate;
@@ -16,6 +17,8 @@ class AlertsController extends Controller
         $create = function() use ($request){
 			try{
 				$alert = Alert::create($request->all());
+				$search = Search::find($request->search_id);
+				$search->update(['alert_id' => $alert->id]);
 				return 'Se ha creado correctamente';
 			}catch(\Exception $e){
 				dd($e);

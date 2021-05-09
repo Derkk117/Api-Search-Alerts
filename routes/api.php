@@ -16,7 +16,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 	//Searches routes
 	Route::post('search', 'SearchesController@store');
 	Route::get('search/{search}', 'SearchesController@show');
-	Route::get('searches/{user}', 'SearchesController@index');
+	Route::get('searches/{user}', 'SearchesController@showSearches');
 	Route::get('recent/searches/{user}', 'SearchesController@recentSearches');
 
 	//Alerts routes
