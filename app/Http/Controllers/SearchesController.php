@@ -6,6 +6,7 @@ use App\User;
 use App\Search;
 use Illuminate\Http\Request;
 use App\Http\Requests\SearchStore;
+use App\Http\Requests\SearchUpdate;
 
 class SearchesController extends Controller
 {    
@@ -31,6 +32,21 @@ class SearchesController extends Controller
 		return Search::where('id', $search->id)->with('Alert')->first();
 	}
 
+	public function update(SearchUpdate $request, Search $search)
+	{
+		$create = function() use ($request, $search){
+			try{
+				$search->update($request->all());
+				return 'Se ha actualizado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al actualizar, intentelo nuevamente';
+			}
+		};
+	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
+	}
+
     public function store(SearchStore $request)
 	{
         $user_id = \DB::select("SELECT * FROM users WHERE email='" . $request->email . "' LIMIT 1");
@@ -46,5 +62,20 @@ class SearchesController extends Controller
 			}
 		};
 	    return response()->json(['message' => \DB::transaction($create), 'status' => $this->status], $this->status);
+    }
+
+	public function destroy(Search $search)
+    {
+        $create = function() use ($search){
+			try{
+				$search->delete();
+				return 'Se ha eliminado correctamente';
+			}catch(\Exception $e){
+				dd($e);
+				$this->status = 500;
+				return 'Hubo un error al eliminar, intentelo nuevamente';
+			}
+		};
+		return response()->json(['message'=>\DB::transaction($create), 'status' => $this->status]);
     }
 }

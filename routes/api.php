@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('search/{search}', 'SearchesController@show');
 	Route::get('searches/{user}', 'SearchesController@showSearches');
 	Route::get('recent/searches/{user}', 'SearchesController@recentSearches');
+	Route::put('search/{search}', 'SearchesController@update');
+	Route::delete('search/{search}', 'SearchesController@destroy');
 
 	//Alerts routes
 	Route::post('alert', 'AlertsController@store');
